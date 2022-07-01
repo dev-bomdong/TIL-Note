@@ -1,0 +1,118 @@
+# 클로저(Closure)와 커링(Curring)
+
+## 클로저(Closure)
+
+어떤 `함수 A`에서 선언한 `변수 c`를 참조하는 내부함수를 외부로 전달할 경우, `함수 A`의 실행 컨텍스트가 종료된 이후에도 `변수 c`가 사라지지 않는 현상을 뜻한다.
+
+주로 전역 변수의 사용을 억제하고, 정보를 은닉하기 위해 사용된다.
+
+이 때 외부로 전달한다는 것은 외부함수의 결과값으로 내부함수를 return해서 전달하는 것뿐만 아니라, setTimeout같은 window 메서드의 콜백함수나 addEventListener에 등록하는 handler 함수의 경우도 포함한다.
+
+아래 예시를 통해 코드로도 살펴보자.
+
+```javascript
+const outer = () => {
+  let a = 1;
+  const inner = () => {
+    return ++a; //outer함수의 변수 a 참조
+  };
+  inner();
+};
+
+const outer2 = outer(); //outer함수의 실행 컨텍스트 종료
+console.log(outer2()); //inner함수 실행, 결과값: 2
+console.log(outer2()); //inner함수 실행, 결과값: 3
+```
+
+outer2가 선언될 때를 보면 outer2는 outer함수의 결과값인 inner함수를 참조하게 되고, 이 때 outer함수의 실행 컨텍스트는 종료된다.
+하지만 outer2가 실행될 때를 보니 실행 컨텍스트가 종료된 outer함수의 변수 a를 활용해 결과값이 계속 나오고 있다.
+이렇게 외부 함수의 LexicalEnvironment가 가비지 컬렉팅되지 않고 살아남는 현상을 클로저라 한다.
+
+<br />
+
+## 클로저(Closure)의 특징과 활용
+
+클로저의 특징을 활용한 실용적인 예제 코드를 알아보자.
+
+### 1. 캡슐화
+
+MDN에 의하면 클로저는 데이터(lexical environment)와 그 데이터를 조작하는 함수를 연관시켜주므로, 객체지향 프로그래밍과 같은 맥락에 있다. 따라서 하나의 메소드를 가진 객체를 사용하는 모든 곳에 클로저를 사용할 수 있다.
+
+간단한 예시로는 p태그를 클릭할 때 폰트 컬러가 변경되는 함수를 생각해볼 수 있다.
+
+```javascript
+  //색상 변경 함수를 리턴하는 함수
+  function setColor (color) {
+     return function() {
+       document.body.style.fontColor = color;
+     };
+   }
+
+  const colorRed = setColor(red);
+  const colorBlue = setColor(blue);
+  const colorYellow = setColor(yellow);
+
+  //p태그의 onClick 이벤트에 전달
+  document.getElementById('color-red').onclick = colorRed;
+  document.getElementById('color-blue').onclick = colorBlue;
+  document.getElementById('color-yellow').onclick = colorYellow;
+
+  <p id="color-red">red</p>
+  <p id="color-blue">blue</p>
+  <p id="color-yellow">yellow</p>
+```
+
+2. 정보 은닉 (접근 권한 제어)
+
+```javascript
+function tellMyLover(name) {
+  const _name = name;
+  return function () {
+    console.log(`My lover is ${_name}`);
+  };
+}
+
+const tellSecret = tellMyLover("YOU");
+
+tellSecret(); //My lover is YOU
+```
+
+my lover를 변경할 수 없는, 아주 느끼한 예제 코드를 통해 알 수 있는 사실
+
+클로저는 변수의 접근 권한을 제어할 수 있다.
+
+<br />
+
+## 커링(Curring)
+
+`f(a, b, c)`처럼 단일 호출로 처리하는 함수를 `f(a)(b)(c)`와 같이 각각의 인수가 호출 가능한 프로세스로 호출된 후 병합되도록 변환하는 것을 뜻한다.
+
+<br />
+
+## 클로저와 커링을 활용한 예시
+
+```javascript
+//기존함수
+function multiplyThree(x, y, z) {
+  console.log(x * y * z);
+}
+
+multiplyThree(4, 5, 2); // 40
+
+// 커링 함수
+function multiplyThree(x) {
+  // 클로저로 생성된 공간
+  return function (y) {
+    return function (z) {
+      console.log(x * y * z);
+    };
+  };
+}
+
+multiplyThree(4)(5)(2); // 40
+
+//화살표 함수
+let multiplyThree = (x) => (y) => (z) => console.log(x * y * z); // 커링 함수
+
+multiplyThree(4)(5)(2); // 40
+```
