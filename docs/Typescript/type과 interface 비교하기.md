@@ -1,5 +1,7 @@
 # type과 interface 비교하기
 
+<br />
+
 ```javascript
 interface IPerson {
   name: string;
@@ -12,12 +14,12 @@ type TPerson = {
 };
 ```
 
-타입스크립트에서 타입을 정의하는 방법은 `type`과 `interface`가 있다.
+타입스크립트에서 타입을 정의하는 방법은 `type`과 `interface`가 있다. <br />
 대부분의 경우에는 비슷하게 사용되지만, 분명한 차이점이 존재하는 두 방법에 대해 알아보자.
 
-# 차이점
+## 차이점
 
-## 1. 타입 확장
+### 1. 타입 확장
 
 - interface는 `extends` 키워드를 사용해 타입을 확장한다.
 - type은 `&` 연산자를 통해 타입을 확장한다.
@@ -56,7 +58,7 @@ const person: IPerson = {
 
 <br />
 
-## 2. computed property name (계산된속성명)
+### 2. computed property name (계산된속성명)
 
 computed property name (계산된속성명)은 아래처럼 표현식으로 객체의 key값을 정의하는 문법이다.
 
@@ -88,10 +90,10 @@ interface NameInterface {
 
 <br />
 
-## 3. 유니온 개념의 유무
+### 3. 유니온 개념의 유무
 
 ```javascript
 type ID = number | string;
 ```
 
-- type은 유니온 타입 선언이 가능하므로 병렬적인 확장에선 type을 사용하는 것이 좋다.
+type은 유니온 타입 선언이 가능하므로 병렬적인 확장에선 type을 사용하는 것이 좋다.

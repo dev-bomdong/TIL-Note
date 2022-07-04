@@ -1,4 +1,4 @@
-# Route에서의 조건부 렌더링
+<!-- # Route에서의 조건부 렌더링
 
 <p>React에서 프로젝트를 진행할 때 모든 페이지에 nav bar와 footer가 필요하다면, route, path를 관리하는 route.js파일 혹은 App.jsx 파일의 <Router> 태그 안에 nav bar와 footer 컴포넌트를 넣어두고는 한다. </p>
 
@@ -72,4 +72,4 @@ function App(props) {
 }
 
 export default App;
-```
+``` -->

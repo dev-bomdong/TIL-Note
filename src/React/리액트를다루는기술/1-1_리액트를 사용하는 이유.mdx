@@ -2,21 +2,20 @@
 
 ## React의 등장
 
-3세대 웹 환경이 도래하면서 Javascript만으로도 규모가 큰 Web application 개발이 가능해졌다. <br /> 
+3세대 웹 환경이 도래하면서 Javascript만으로도 규모가 큰 Web application 개발이 가능해졌다. <br />
 하지만 순수 Javascript로만 모든 app의 구조를 관리하려면 어려운 점이 있어, Angular, Vue.js와 같은 프레임워크들이 등장했다.
-
 
 <img src=https://imgs.developpaper.com/imgs/mvc-mvp-mvvm_thumb[8].png />
 
-프레임워크들은 주로 MVC(Model-View-Controller) 아키텍처, MVVM(Model-View-View Model) 아키텍처, 
+프레임워크들은 주로 MVC(Model-View-Controller) 아키텍처, MVVM(Model-View-View Model) 아키텍처,
 Angulr JS는 MVW(Model-View-Whatever) 아키텍처로 app을 구조화한다.
 
 이 아키텍처의 공통점은 Model(app에서 사용하는 data 관리 영역)과 view(사용자에게 보이는 부분)이 존재한다는 것.
 
-프로그램이 사용자에게서 어떤 작업을 받으면 컨트롤러는 model data를 조회 및 수정하고, 변경된 사항을 view에 반영한다.<br /> 
+프로그램이 사용자에게서 어떤 작업을 받으면 컨트롤러는 model data를 조회 및 수정하고, 변경된 사항을 view에 반영한다.<br />
 이 때 보통 updat된 항목을 내부에서 찾아 변경하는 규칙을 정하는데, 이는 app의 규모가 커질수록 비효율적일 수 있다.
 
-페이스북 개발팀은 이러한 비효율을 개선하고 성능을 아끼면서 편안한 UX를 구현하기 위해, 
+페이스북 개발팀은 이러한 비효율을 개선하고 성능을 아끼면서 편안한 UX를 구현하기 위해,
 **data가 변경되면 기존 view를 버리고 새롭게 렌더링하는 React**를 개발하게 된다.
 
 <br />
@@ -36,9 +35,11 @@ Angulr JS는 MVW(Model-View-Whatever) 아키텍처로 app을 구조화한다.
 - template(in 프레임워크)과의 비교 : template은 프레임워크에서 데이터셋이 주어지면 HTML 태그 형식을 문자열로 반환한다. component는 더 복합적인 개념.
 
 ### 렌더링
+
 사용자 화면에 뷰를 보여주는 것.
 
 #### 초기렌더링
+
 말 그대로, **가장 처음에 어떻게 보여질지**를 정하는 것이다.
 React에선 render함수로 초기렌더링을 실행한다.
 
@@ -46,8 +47,8 @@ React에선 render함수로 초기렌더링을 실행한다.
 render() {...}
 ```
 
-render함수는 component의 view가 어떻게 생겼고, 어떻게 작동하는지에 대한 정보를 담은 객체를 반환한다.<br /> 
-함수 내 component들은 재귀적으로 렌더링되며, 최상의 component의 렌더링이 끝나면 <br /> 
+render함수는 component의 view가 어떻게 생겼고, 어떻게 작동하는지에 대한 정보를 담은 객체를 반환한다.<br />
+함수 내 component들은 재귀적으로 렌더링되며, 최상의 component의 렌더링이 끝나면 <br />
 지니고 있는 정보들로 HTML 마크업을 만들고, 실제 페이지의 DOM 요소 안에 주입한다.
 
 component를 실제 페이지에 렌더링할 땐 아래의 순서로 이루어진다.
@@ -58,18 +59,18 @@ component를 실제 페이지에 렌더링할 땐 아래의 순서로 이루어�
 <br />
 
 #### 조화 과정
-React에서 view를 업데이트할 때는 조화 과정(reconciliation)을 거친다고 하는 것이 맞는 표현이다.<br /> 
+
+React에서 view를 업데이트할 때는 조화 과정(reconciliation)을 거친다고 하는 것이 맞는 표현이다.<br />
 앞서 언급했듯이 react component에서 data의 변화가 있을 땐 기존의 view를 버리고 새로운 view로 교체하는 개념이기 때문이다.
 
-조화 과정도 render 함수에서 처리되는데 <br /> 
+조화 과정도 render 함수에서 처리되는데 <br />
 초기렌더링을 설명할 때 render 함수는 view가 어떻게 생기고 작동하는지를 담은 객체를 반환한다고 했다.
 
-component는 data가 업데이트되었을 때 새로운 data를 기반으로 render함수를 다시 호출하고 새로운 view를 생성한다. <br /> 
-이 때 render함수가 반환하는 결과는 곧바로 DOM에 반영되지는 않고, <br /> 
+component는 data가 업데이트되었을 때 새로운 data를 기반으로 render함수를 다시 호출하고 새로운 view를 생성한다. <br />
+이 때 render함수가 반환하는 결과는 곧바로 DOM에 반영되지는 않고, <br />
 이전의 component정보와 비교 후 바뀐 DOM 노드만 변경하는 방식으로 DOM트리를 업데이트한다.
 
-전체 component를 처음부터 렌더링하는게 아니라 변경된 DOM 노드에서만 <br /> 
+전체 component를 처음부터 렌더링하는게 아니라 변경된 DOM 노드에서만 <br />
 최소한의 연산으로 DOM 트리를 업데이트 하기 때문에 최적의 자원을 사용하여 수행하는 것이라 볼 수 있다.
 
 <br />
-

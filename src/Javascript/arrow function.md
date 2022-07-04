@@ -166,4 +166,7 @@ Person.sayHi();
 
 addEventListener 함수의 콜백 함수를 화살표 함수로 정의하면, 화살표 함수의 this가 상위의 전역 객체 window를 가리킨다. <span style="color:gray">_(이쯤되면 정말 화살표 함수의 this..뚝심있다..!)_</span> 일반 함수로 정의할 경우엔 이벤트 리스너에 바인딩된 요소(currentTarget)를 가리키므로, 일반 함수를 이용하자.
 
-> 📌️ **참고 학습자료** > [poiemaweb.com - 화살표 함수](https://poiemaweb.com/es6-arrow-function) > [MDN - 화살표 함수](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
+> 📌️ **참고 학습자료**
+
+[poiemaweb.com - 화살표 함수](https://poiemaweb.com/es6-arrow-function)
+[MDN - 화살표 함수](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
