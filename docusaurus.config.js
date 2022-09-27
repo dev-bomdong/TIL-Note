@@ -5,10 +5,10 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 (
   module.exports = {
-    title: "My Site",
+    title: "My TIL",
     tagline: "Dinosaurs are cool",
-    url: "https://your-docusaurus-test-site.com",
-    baseUrl: "/",
+    url: 'https://{site-name}.netlify.app', // Netlify 사이트 이름을 설정한다.
+    baseUrl: '/',
     onBrokenLinks: "throw",
     onBrokenMarkdownLinks: "warn",
     favicon: "img/favicon.ico",
