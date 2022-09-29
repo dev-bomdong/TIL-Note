@@ -5,8 +5,8 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 (
   module.exports = {
-    title: "My TIL",
-    tagline: "Dinosaurs are cool",
+    title: "TIL Note",
+    tagline: "from a front-end developer who loves to record ",
     url: 'https://{site-name}.netlify.app', // Netlify 사이트 이름을 설정한다.
     baseUrl: '/',
     onBrokenLinks: "throw",
